@@ -597,6 +597,47 @@
             const offsetY = (event.clientY / innerHeight - 0.5) * 12;
             heroCard.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
         });
+
+        // Bottom button functionality
+        const bottomBtn = document.getElementById("bottomBtn");
+        const bottomText = document.getElementById("bottomText");
+        
+        bottomBtn.addEventListener("click", () => {
+            bottomText.style.display = bottomText.style.display === "block" ? "none" : "block";
+        });
     </script>
+
+    <!-- Bottom Button -->
+    <div style="position: fixed; bottom: 20px; right: 20px; text-align: center; z-index: 1000;">
+        <button id="bottomBtn" style="
+            padding: 8px 16px;
+            font-size: 12px;
+            background: var(--accent);
+            color: var(--bg-1);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, background 0.2s;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            Click Me
+        </button>
+        <div id="bottomText" style="
+            display: none;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: var(--surface);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--stroke);
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--ink);
+            box-shadow: var(--shadow);
+        ">
+            Neharika kafle
+        </div>
+    </div>
 </body>
 </html>

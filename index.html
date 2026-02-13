@@ -3,25 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Sagar Koirala</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: Arial, sans-serif;
+        :root {
+            --bg-1: #0c1b1f;
+            --bg-2: #15333b;
+            --accent: #ffb454;
+            --accent-2: #ff6f59;
+            --ink: #f7f3ee;
+            --muted: rgba(247, 243, 238, 0.7);
+            --surface: rgba(15, 30, 33, 0.75);
+            --surface-2: rgba(247, 243, 238, 0.08);
+            --stroke: rgba(247, 243, 238, 0.18);
+            --shadow: 0 30px 80px rgba(4, 10, 12, 0.45);
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top left, rgba(255, 180, 84, 0.2), transparent 55%),
+                radial-gradient(circle at 70% 10%, rgba(255, 111, 89, 0.18), transparent 45%),
+                linear-gradient(135deg, var(--bg-1), var(--bg-2));
+            font-family: "Space Grotesk", sans-serif;
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.35;
+            animation: float 18s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            background: #ffb454;
+            top: -120px;
+            left: -90px;
+        }
+
+        .blob-2 {
+            background: #2dd4bf;
+            bottom: -140px;
+            right: -120px;
+            animation-delay: -6s;
+        }
+
+        .grain {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+            opacity: 0.4;
+            mix-blend-mode: soft-light;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+            50% {
+                transform: translate3d(40px, -30px, 0);
+            }
+        }
+
+        .container {
+            width: min(1120px, 92vw);
+            margin: 0 auto;
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0 12px;
+        }
+
+        .logo {
+            font-family: "Fraunces", serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.02em;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95rem;
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a:focus-visible::after {
+            width: 100%;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            font-family: "Space Grotesk", sans-serif;
+            border: 1px solid var(--stroke);
+            color: var(--ink);
+            background: transparent;
+            padding: 10px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            border-color: rgba(247, 243, 238, 0.4);
+        }
+
+        .pill {
+            background: var(--accent);
+            color: #1b1b1b;
+            border: none;
+        }
+
+        .ghost {
+            background: rgba(247, 243, 238, 0.08);
+        }
+
+        main {
+            padding: 40px 0 80px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--muted);
+        }
+
         h1 {
-            color: white;
-            font-size: 4rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: "Fraunces", serif;
+            font-size: clamp(2.4rem, 4vw, 4.2rem);
+            margin: 12px 0 16px;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 520px;
+        }
+
+        .rotate {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0 24px;
+        }
+
+        .primary {
+            background: var(--accent-2);
+            color: #101010;
+            border: none;
+        }
+
+        .secondary {
+            background: transparent;
+            border: 1px solid var(--accent);
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+        }
+
+        .stat {
+            padding: 14px 16px;
+            background: var(--surface);
+            border: 1px solid var(--stroke);
+            border-radius: 16px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .hero-card {
+            padding: 24px;
+            border-radius: 24px;
+            background: var(--surface);
+            border: 1px solid var(--stroke);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+            transition: transform 0.2s ease;
+        }
+
+        .hero-card h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--surface-2);
+            font-size: 0.85rem;
+            margin: 6px 6px 0 0;
+        }
+
+        .grid {
+            margin-top: 56px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            padding: 20px;
+            border-radius: 18px;
+            background: rgba(13, 26, 29, 0.7);
+            border: 1px solid var(--stroke);
+            transition: transform 0.25s ease, border 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 180, 84, 0.5);
+        }
+
+        .card h4 {
+            margin: 0 0 8px;
+        }
+
+        .timeline {
+            margin-top: 56px;
+            display: grid;
+            gap: 14px;
+        }
+
+        details {
+            background: rgba(247, 243, 238, 0.06);
+            border: 1px solid var(--stroke);
+            border-radius: 16px;
+            padding: 14px 18px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 70px;
+            padding: 24px 0 40px;
+            border-top: 1px solid var(--stroke);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(18, 31, 34, 0.9);
+            color: var(--ink);
+            border: 1px solid var(--stroke);
+            padding: 12px 16px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 5;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                display: none;
+            }
+            .site-header {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Sagar Koirala</h1>
+    <div class="bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="grain"></div>
+    </div>
+
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">SK</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#work">Work</a>
+                <a href="#now">Now</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="actions">
+                <button class="ghost" id="moodBtn" type="button">Change mood</button>
+                <button class="pill" id="likeBtn" type="button">Appreciate <span id="likeCount">0</span></button>
+            </div>
+        </header>
+
+        <main id="home">
+            <section class="hero">
+                <div>
+                    <p class="eyebrow">Creative technologist</p>
+                    <h1>Sagar Koirala</h1>
+                    <p class="lead">
+                        I build <span class="rotate" data-rotate>web experiences</span> that feel warm, alive, and intentional.
+                    </p>
+                    <div class="cta">
+                        <button class="primary" id="shuffleBtn" type="button">Shuffle vibe</button>
+                        <button class="secondary" id="copyBtn" type="button" data-email="hello@sagar-koirala.com.np">Copy email</button>
+                    </div>
+                    <div class="meta">
+                        <div class="stat">
+                            <strong>4+ years</strong>
+                            <span>Design + engineering</span>
+                        </div>
+                        <div class="stat">
+                            <strong>12 projects</strong>
+                            <span>Brand & product launches</span>
+                        </div>
+                        <div class="stat">
+                            <strong>Based in Nepal</strong>
+                            <span>Working globally</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-card" id="heroCard">
+                    <h3>Now</h3>
+                    <p class="lead" id="quote">Crafting a playful identity system for a wellness studio.</p>
+                    <div>
+                        <span class="tag">Product design</span>
+                        <span class="tag">Storytelling</span>
+                        <span class="tag">Front-end</span>
+                    </div>
+                    <div class="grid" style="margin-top: 18px; grid-template-columns: repeat(2, 1fr);">
+                        <div class="card">
+                            <h4>Current focus</h4>
+                            <p class="lead">Micro-interactions and motion systems.</p>
+                        </div>
+                        <div class="card">
+                            <h4>Open to</h4>
+                            <p class="lead">Founders who want bold, soulful UI.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid" id="work">
+                <article class="card">
+                    <h4>Brand to product</h4>
+                    <p class="lead">Turn identity systems into tangible product moments.</p>
+                </article>
+                <article class="card">
+                    <h4>Motion choreography</h4>
+                    <p class="lead">Subtle motion that guides attention without noise.</p>
+                </article>
+                <article class="card">
+                    <h4>Design systems</h4>
+                    <p class="lead">Foundational kits that keep teams aligned.</p>
+                </article>
+                <article class="card">
+                    <h4>Creative dev</h4>
+                    <p class="lead">Scroll, hover, and delight-ready experiences.</p>
+                </article>
+            </section>
+
+            <section class="timeline" id="now">
+                <details open>
+                    <summary>Studio experiments</summary>
+                    <p class="lead">Exploring tactile UI textures and ambient light systems.</p>
+                </details>
+                <details>
+                    <summary>Collaborations</summary>
+                    <p class="lead">Partnering with founders who value storytelling and clarity.</p>
+                </details>
+                <details>
+                    <summary>Learning</summary>
+                    <p class="lead">Refining motion curves and expressive typography pairs.</p>
+                </details>
+            </section>
+        </main>
+
+        <footer class="footer" id="contact">
+            <span>Say hello: hello@sagar-koirala.com.np</span>
+            <span>Available for select projects in 2026.</span>
+            <span>Mention: KAN078BCT071</span>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        const rotateWords = [
+            "web experiences",
+            "identity systems",
+            "live prototypes",
+            "brand moments",
+            "motion languages"
+        ];
+
+        const quotes = [
+            "Crafting a playful identity system for a wellness studio.",
+            "Building a modular UI kit for a global travel brand.",
+            "Designing a calm onboarding flow for a fintech app.",
+            "Experimenting with layered textures and kinetic type.",
+            "Prototyping an audio-first product homepage."
+        ];
+
+        const themes = [
+            {
+                name: "Dune",
+                bg1: "#0c1b1f",
+                bg2: "#15333b",
+                accent: "#ffb454",
+                accent2: "#ff6f59",
+                ink: "#f7f3ee"
+            },
+            {
+                name: "Lagoon",
+                bg1: "#0b1820",
+                bg2: "#173c4b",
+                accent: "#7ae582",
+                accent2: "#ffd670",
+                ink: "#f5f7f9"
+            },
+            {
+                name: "Canyon",
+                bg1: "#1c0f13",
+                bg2: "#3b1b1f",
+                accent: "#f6aa1c",
+                accent2: "#f4845f",
+                ink: "#f8f2e8"
+            }
+        ];
+
+        const root = document.documentElement;
+        const rotateEl = document.querySelector("[data-rotate]");
+        const quoteEl = document.getElementById("quote");
+        const shuffleBtn = document.getElementById("shuffleBtn");
+        const moodBtn = document.getElementById("moodBtn");
+        const copyBtn = document.getElementById("copyBtn");
+        const likeBtn = document.getElementById("likeBtn");
+        const likeCountEl = document.getElementById("likeCount");
+        const toast = document.getElementById("toast");
+        const heroCard = document.getElementById("heroCard");
+
+        let rotateIndex = 0;
+        let quoteIndex = 0;
+        let themeIndex = 0;
+
+        const toastMessage = (message) => {
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 1800);
+        };
+
+        const applyTheme = (theme) => {
+            root.style.setProperty("--bg-1", theme.bg1);
+            root.style.setProperty("--bg-2", theme.bg2);
+            root.style.setProperty("--accent", theme.accent);
+            root.style.setProperty("--accent-2", theme.accent2);
+            root.style.setProperty("--ink", theme.ink);
+        };
+
+        const rotateText = () => {
+            rotateIndex = (rotateIndex + 1) % rotateWords.length;
+            rotateEl.textContent = rotateWords[rotateIndex];
+        };
+
+        const shuffleQuote = () => {
+            quoteIndex = (quoteIndex + 1) % quotes.length;
+            quoteEl.textContent = quotes[quoteIndex];
+            toastMessage("Vibe updated.");
+        };
+
+        shuffleBtn.addEventListener("click", shuffleQuote);
+        moodBtn.addEventListener("click", () => {
+            themeIndex = (themeIndex + 1) % themes.length;
+            applyTheme(themes[themeIndex]);
+            toastMessage(`Mood: ${themes[themeIndex].name}`);
+        });
+
+        copyBtn.addEventListener("click", async () => {
+            const email = copyBtn.getAttribute("data-email");
+            try {
+                await navigator.clipboard.writeText(email);
+                toastMessage("Email copied.");
+            } catch (err) {
+                toastMessage("Copy failed. Try selecting manually.");
+            }
+        });
+
+        const likeState = {
+            liked: localStorage.getItem("liked") === "true",
+            count: Number(localStorage.getItem("likeCount") || "18")
+        };
+
+        likeCountEl.textContent = likeState.count;
+        if (likeState.liked) {
+            likeBtn.classList.add("ghost");
+        }
+
+        likeBtn.addEventListener("click", () => {
+            if (likeState.liked) {
+                toastMessage("Already appreciated.");
+                return;
+            }
+            likeState.liked = true;
+            likeState.count += 1;
+            likeCountEl.textContent = likeState.count;
+            localStorage.setItem("liked", "true");
+            localStorage.setItem("likeCount", String(likeState.count));
+            likeBtn.classList.add("ghost");
+            toastMessage("Thanks for the love!");
+        });
+
+        window.setInterval(rotateText, 3500);
+
+        window.addEventListener("pointermove", (event) => {
+            const { innerWidth, innerHeight } = window;
+            const offsetX = (event.clientX / innerWidth - 0.5) * 12;
+            const offsetY = (event.clientY / innerHeight - 0.5) * 12;
+            heroCard.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+        });
+    </script>
 </body>
 </html>

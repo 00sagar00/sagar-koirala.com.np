@@ -2,12 +2,110 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>temp-react</title>
+    <title>Sagar Koirala Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div class="app-shell" id="app-shell">
+      <canvas class="particle-layer" id="particle-layer" aria-hidden="true"></canvas>
+      <div class="cursor-orb" id="cursor-orb" aria-hidden="true"></div>
+
+      <header class="navbar">
+        <a href="#home" class="brand">Sagar <span>Koirala</span></a>
+        <nav aria-label="Main navigation">
+          <ul id="nav-items"></ul>
+        </nav>
+        <button type="button" id="theme-toggle" class="theme-toggle">Light Mode</button>
+      </header>
+
+      <main>
+        <section id="home" class="hero-section reveal">
+          <p class="hero-badge">Creative Developer and UI Engineer</p>
+          <h1 id="secret-tap-target">
+            Building playful digital products that feel
+            <span> alive on every scroll.</span>
+          </h1>
+          <p class="hero-text">
+            I craft modern web experiences with motion, clarity, and personality. Tap the heading five
+            times for a tiny surprise.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">See Projects</a>
+            <a href="#contact" class="btn btn-ghost">Contact Me</a>
+          </div>
+        </section>
+
+        <section id="about" class="about-section reveal">
+          <div class="about-copy">
+            <h2>About Me</h2>
+            <p>
+              I am Sagar, a builder who mixes engineering with storytelling. I enjoy turning complex
+              product goals into crisp interfaces that people remember.
+            </p>
+            <ul class="fun-facts">
+              <li>Favorite debugging playlist: synthwave and lo-fi.</li>
+              <li>Can redesign a flow faster than I can order coffee.</li>
+              <li>Weekend hobby: micro games and interactive UI experiments.</li>
+            </ul>
+          </div>
+          <figure class="about-photo">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80"
+              alt="Portrait of Sagar Koirala"
+            />
+          </figure>
+        </section>
+
+        <section id="projects" class="projects-section reveal">
+          <div class="section-head">
+            <h2>Projects</h2>
+            <p>Interactive previews that expand when selected.</p>
+          </div>
+          <div class="project-grid" id="project-grid"></div>
+          <div class="project-preview" id="project-preview" role="region" aria-live="polite"></div>
+        </section>
+
+        <section id="skills" class="skills-section reveal">
+          <div class="section-head">
+            <h2>Skills</h2>
+            <p>Animated bars represent practical depth from product work.</p>
+          </div>
+          <div class="skill-list" id="skill-list"></div>
+        </section>
+
+        <section id="contact" class="contact-section reveal">
+          <div class="section-head">
+            <h2>Contact</h2>
+            <p>Tell me about your idea, product, or collaboration opportunity.</p>
+          </div>
+          <form class="contact-form" id="contact-form">
+            <label>
+              Name
+              <input name="name" type="text" required />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+            <button type="submit" id="submit-btn" class="btn btn-primary">Send Message</button>
+            <p class="form-note" id="form-note" hidden></p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
